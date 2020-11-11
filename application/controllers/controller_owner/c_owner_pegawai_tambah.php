@@ -1,25 +1,29 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class c_owner_pegawai_tambah extends CI_Controller {
+class c_owner_pegawai_tambah extends CI_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->load->library('template');
         $this->load->model('model_owner/m_owner_pegawai');
     }
 
-    function index() {
-    //     if ($this->cekLogin() == FALSE) {
-    //         redirect(base_url());
-    //     } else {
-          //  $this->template->ownerview('owner/owner_pegawai_tambah');
-       // }
-   //}
+    function index()
+    {
+        // if ($this->cekLogin() == FALSE) {
+        //     redirect(base_url());
+        // } else {
+            $this->template->ownerview('owner/owner_pegawai_tambah', null);
+        //}
+    }
 
-    // fungsi pengecekan login agar user tidak bisa loncat ke halaman ini tanpa login terlebih dahulu
-    // function cekLogin() {
+    //fungsi pengecekan login agar user tidak bisa loncat ke halaman ini tanpa login terlebih dahulu
+    // function cekLogin()
+    // {
     //     if ($this->session->userdata('login') == FALSE) {
     //         return FALSE;
     //     } else {
@@ -28,7 +32,8 @@ class c_owner_pegawai_tambah extends CI_Controller {
     // }
 
     // fungsi ini untuk menambahkan data pegawai baru kedalam sistem
-    function tambah_pegawai() {
+    function tambah_pegawai()
+    {
         // memanggil validasi form, ini dari framework CI otomatis
         $this->load->library('form_validation');
 
@@ -80,5 +85,4 @@ class c_owner_pegawai_tambah extends CI_Controller {
             $this->template->ownerview('owner/owner_pegawai_tambah');
         }
     }
-
 }

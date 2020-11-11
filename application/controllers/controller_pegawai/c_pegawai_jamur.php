@@ -82,7 +82,7 @@ class c_pegawai_jamur extends CI_Controller {
         // numeric = inputan harus berupa angka
         $this->form_validation->set_rules('berat', 'Berat jamur', 'trim|min_length[1]|max_length[4]|numeric');
         if ($this->form_validation->run() == TRUE) {
-            $id_rak;
+            //$id_rak;
             if ($this->input->post('id_rak_new') == 0) {
                 $id_rak = $this->input->post('id_rak_old');
             } else {

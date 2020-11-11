@@ -10,8 +10,26 @@ class m_pegawai_jamur extends CI_Model {
 
     //fungsi ini digunakan untuk mengambil seluruh data jamur
     function ambil_data_jamur() {
-        $this->db->select(array('j.id_jamur', 'j.id_rak', 'r.nama_rak', 'j.berat', 'j.tanggal_masuk', 'j.id_petugas', 'u.nama', 'j.status_jamur', 'sj.keterangan'));
-        $this->db->from('jamur j JOIN rak r ON (j.id_rak = r.id_rak) JOIN user u ON (j.id_petugas = u.id_user) JOIN status_jamur sj ON (j.status_jamur = sj.id_status)');
+        $this->db->select(
+            array(
+                'j.id_jamur', 
+                'j.id_rak', 
+                'r.nama_rak', 
+                'j.berat', 
+                'j.tanggal_masuk', 
+                'j.id_petugas', 
+                'u.nama', 
+                'j.status_jamur', 
+                'sj.keterangan'
+            )
+        );
+
+        $this->db->from(
+            'jamur j JOIN rakjamur r ON (j.id_rak = r.id_rak) 
+            JOIN user u ON (j.id_petugas = u.id_user) 
+            JOIN status_jamurt sj ON (j.status_jamur = sj.id_status)'
+        );
+
         $this->db->order_by('tanggal_masuk DESC');
         return $this->db->get();
     }

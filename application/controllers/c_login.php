@@ -49,6 +49,7 @@ class c_login extends CI_Controller {
                         'login' => 1
                     );
                     $this->session->set_userdata($datauser);
+
                     // mengecek level akses user yang login
                     if ($this->m_login->deteksiLevelAkses($username, $pass) == 1) {
                         // jika yang login itu BOS

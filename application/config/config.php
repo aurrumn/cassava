@@ -25,6 +25,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['base_url'] = 'http://localhost/sijamurt/';
 
+/* kusus .env alvian
+| nila pake $config yg atas
+*/
+//$config['base_url'] = 'http://sijamurt.com/';
+
 /*
 |--------------------------------------------------------------------------
 | Index File
