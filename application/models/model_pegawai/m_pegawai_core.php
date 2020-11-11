@@ -13,14 +13,14 @@ class m_pegawai_core extends CI_Model {
         $query = $this->db->query
                 ('
                     SELECT
-                        s.id_singkong
+                        j.id_jamur
                         , IFNULL(p.id_periksa, "-") AS id_periksa
                         , GROUP_CONCAT(sk.id_kriteria SEPARATOR ",") AS id_kriteria 
                         , GROUP_CONCAT(sk.bobot SEPARATOR ",") AS nilai 
                     FROM
-                        singkong s
+                        jamur j
                         LEFT JOIN periksa p
-                            ON s.id_singkong = p.id_singkong
+                            ON j.id_jamur = p.id_jamur
                         JOIN detail_periksa d
                             ON p.id_periksa = d.id_periksa
                         JOIN (
@@ -28,11 +28,11 @@ class m_pegawai_core extends CI_Model {
                             ) sk
                             on sk.id_sub_kriteria = d.id_subkriteria
                     WHERE
-                        s.status_singkong = 2
+                        j.status_jamur = 2
                     GROUP BY
                         p.id_periksa
                     ORDER BY
-                        s.id_singkong ASC
+                        j.id_jamur ASC
                         , p.id_periksa ASC
                         , sk.id_kriteria ASC			
                 ');
@@ -53,11 +53,11 @@ class m_pegawai_core extends CI_Model {
                                     $tot++;
                                 }
                             }
-                            $sigma_hD[($dataset[$i]['id_singkong'] . ' -> ' . $dataset[$j]['id_singkong'])] = $tot;
-                            $sigma_hD_flow[($dataset[$i]['id_singkong'] . ' -> ' . $dataset[$j]['id_singkong'])] = (1 / count($data_nilai_1) * $tot);
+                            $sigma_hD[($dataset[$i]['id_jamur'] . ' -> ' . $dataset[$j]['id_jamur'])] = $tot;
+                            $sigma_hD_flow[($dataset[$i]['id_jamur'] . ' -> ' . $dataset[$j]['id_jamur'])] = (1 / count($data_nilai_1) * $tot);
                         } else {
-                            $sigma_hD[($dataset[$i]['id_singkong'] . ' -> ' . $dataset[$j]['id_singkong'])] = 0;
-                            $sigma_hD_flow[($dataset[$i]['id_singkong'] . ' -> ' . $dataset[$j]['id_singkong'])] = 0;
+                            $sigma_hD[($dataset[$i]['id_jamur'] . ' -> ' . $dataset[$j]['id_jamur'])] = 0;
+                            $sigma_hD_flow[($dataset[$i]['id_jamur'] . ' -> ' . $dataset[$j]['id_jamur'])] = 0;
                         }
                     }
                 }
@@ -78,16 +78,16 @@ class m_pegawai_core extends CI_Model {
                         $data_nilai_1 = explode(',', $dataset[$i]['nilai']);
                         $data_nilai_2 = explode(',', $dataset[$j]['nilai']);
                         if (count($data_nilai_1) == count($data_nilai_2)) {
-                            $b = explode(' -> ', ($dataset[$i]['id_singkong'] . ' -> ' . $dataset[$j]['id_singkong']));
-                            // echo '<br />wedhus l masuk ' . $b[1] . '-' . $dataset[$i]['id_singkong'];
-                            if ($b[0] == $dataset[$i]['id_singkong']) {
+                            $b = explode(' -> ', ($dataset[$i]['id_jamur'] . ' -> ' . $dataset[$j]['id_jamur']));
+                            // echo '<br />wedhus l masuk ' . $b[1] . '-' . $dataset[$i]['id_jamur'];
+                            if ($b[0] == $dataset[$i]['id_jamur']) {
                                 // echo ' --> process ';
-                                $leaving_flow[$i] += (1 / count($data_nilai_1) * $sigma_hD[($dataset[$i]['id_singkong'] . ' -> ' . $dataset[$j]['id_singkong'])]);
+                                $leaving_flow[$i] += (1 / count($data_nilai_1) * $sigma_hD[($dataset[$i]['id_jamur'] . ' -> ' . $dataset[$j]['id_jamur'])]);
                             }
-                            // echo '<br /> e masuk ' . $b[1] . '-' . $dataset[$i]['id_singkong'];
-                            if ($b[1] == $dataset[$j]['id_singkong']) {
+                            // echo '<br /> e masuk ' . $b[1] . '-' . $dataset[$i]['id_jamur'];
+                            if ($b[1] == $dataset[$j]['id_jamur']) {
                                 // echo ' --> process ';
-                                $entering_flow[$j] += (1 / count($data_nilai_1) * $sigma_hD[($dataset[$i]['id_singkong'] . ' -> ' . $dataset[$j]['id_singkong'])]);
+                                $entering_flow[$j] += (1 / count($data_nilai_1) * $sigma_hD[($dataset[$i]['id_jamur'] . ' -> ' . $dataset[$j]['id_jamur'])]);
                             }
                         } else {
                             $leaving_flow[$i] += 0;
@@ -134,7 +134,7 @@ class m_pegawai_core extends CI_Model {
                 // hacked by why you see a ?
 
                 $data_input = array(
-                    'id_singkong' => $dataset[$i]['id_singkong'],
+                    'id_jamur' => $dataset[$i]['id_jamur'],
                     'leaving_flow' => $leaving_flow[$i],
                     'entering_flow' => $entering_flow[$i],
                     'net_flow' => $net_flow[$i],
@@ -143,8 +143,8 @@ class m_pegawai_core extends CI_Model {
                 $this->db->set('tanggal_penghitungan', 'NOW()', FALSE);
                 $this->insert("promethee", $data_input);
 
-                $id_singkong_yang_diupdate = $dataset[$i]['id_singkong'];
-                $this->update("singkong", array('status_singkong' => 3), "id_singkong = '$id_singkong_yang_diupdate'");
+                $id_jamur_yang_diupdate = $dataset[$i]['id_jamur'];
+                $this->update("jamur", array('status_jamur' => 3), "id_jamur = '$id_jamur_yang_diupdate'");
                 // --------------------------------------------------------------------------------------------------
             }
             return TRUE;
@@ -155,10 +155,10 @@ class m_pegawai_core extends CI_Model {
 
     // fungsi ini digunakan untuk mengambil data promethee yang tersimpan dalam database
     function ambil_data_promethee() {
-        $query = "SELECT pt.nama_petani as petani, s.tanggal_masuk, ps.tanggal as tanggal_penilaian, p.tanggal_penghitungan as tanggal_promethee, p.leaving_flow, p.entering_flow, p.id_promethee, p.net_flow as nilai_promethee, u.nama as petugas "
-                . "FROM promethee p JOIN singkong s ON (p.id_singkong = s.id_singkong) "
-                . "JOIN petani pt ON (s.id_petani = pt.id_petani) "
-                . "JOIN periksa ps ON (s.id_singkong = ps.id_singkong) "
+        $query = "SELECT r.nama_rak as rak , j.tgl_rak, ps.tanggal as tanggal_penilaian, p.tanggal_penghitungan as tanggal_promethee, p.leaving_flow, p.entering_flow, p.id_promethee, p.net_flow as nilai_promethee, u.nama as petugas "
+                . "FROM promethee p JOIN jamur j ON (p.id_jamur = j.id_jamur) "
+                . "JOIN rak r ON (j.id_rak = pt.id_rak) "
+                . "JOIN periksa ps ON (j.id_jamur = ps.id_jamur) "
                 . "JOIN user u ON (p.petugas = u.id_user) "
                 . "ORDER BY p.tanggal_penghitungan, p.net_flow DESC";
         return $this->db->query($query);

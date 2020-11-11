@@ -228,8 +228,8 @@
 </div>
 <footer>
     <div class="">
-        <p class="pull-right">Sistem Informasi Kualitas Singkong Unggul untuk Pembuatan MOCAF |
-            <span class="lead"> <i class="fa fa-leaf"></i> The Cassava</span>
+        <p class="pull-right">Sistem Informasi Spesifikasi Kualitas Jamur Tiram |
+            <span class="lead"> <i class="fa fa-tree"></i> SI Jamur Tiram</span>
         </p>
     </div>
     <div class="clearfix"></div>

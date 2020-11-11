@@ -81,7 +81,7 @@ $db['default'] = array(
 
 	// NAMA DATA BASE ---------------------------
 
-	'database' => 'cassava',
+	'database' => 'jamurt',
 
 	// ------------------------------------------
 

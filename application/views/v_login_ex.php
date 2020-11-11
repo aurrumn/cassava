@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>|  THE JAMURT | </title>
+        <title>|  SI Jamur Tiram | </title>
 
         <!-- Bootstrap core CSS -->
 
@@ -57,7 +57,7 @@
                             <form role="form" method="post" style="color:white" action="<?php echo base_url(); ?>c_login/masuksistem">
                                 <br>
                                 <h1 style="font-size:40px"><i class="fa fa-tree" style="font-size:30px;"></i><br><br>
-                                SI Jamur Tiram
+                                    SI Jamur Tiram
                                 </h1>
                                 <h4>--- Login Form ---</h4>
 
@@ -77,16 +77,16 @@
                                 <div class="clearfix"></div>
                                 <div class="separator">
 
-                                    <p style="font-size:14px" class="change_link">Rak Jamur Baru ? 
-                                        <a style="font-size:18px; color:white" href="<?php echo base_url(); ?>c_pendaftaran_rak" style="color:white" class="to_register">Daftarkan Rak</a>
+                                    <p style="font-size:14px" class="change_link">Petani Singkong Baru ? 
+                                        <a style="font-size:18px; color:white" href="<?php echo base_url(); ?>c_pendaftaran_petani" style="color:white" class="to_register">Daftarkan Petani</a>
                                     </p>
-                                    <p style="font-size:13px" class="change_link">Kabar Jamur Anda? 
-                                        <a style="font-size:16px; color:white" href="<?php echo base_url(); ?>c_lihat_jamur" style="color:white" class="to_register">Lihat Data Jamur</a>
+                                    <p style="font-size:13px" class="change_link">Kabar Singkong Anda? 
+                                        <a style="font-size:16px; color:white" href="<?php echo base_url(); ?>c_lihat_singkong" style="color:white" class="to_register">Lihat Data Singkong</a>
                                     </p>
                                     <div class="clearfix"></div>
                                     <div>
                                         <h1><i class="fa fa-thumbs-o-up" style="font-size: 26px;"></i> SELAMAT DATANG</h1>
-                                        <p>©2020 Hak Cipta Dilindungi</p>
+                                        <p>©2018 Hak Cipta Dilindungi</p>
                                         <br>
                                         <?php
                                         if ($this->session->flashdata('message') != null) {

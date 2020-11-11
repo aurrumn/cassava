@@ -1,7 +1,7 @@
 <div class="">
     <div class="row col-md-9 page-title">
         <div class="title_left">
-            <h3>Selamat Datang Pegawai,</h3>
+            <h3>Selamat Datang Owner,</h3>
         </div>
     </div>
     <div class="clearfix"></div>
@@ -12,7 +12,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Tabel Data Kriteria<small> Menampilkan Data Kriteria</small></h2>
+                    <h2>Tabel Data Kriteria</h2>
                     <ul class="nav navbar-right">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -21,7 +21,7 @@
                 </div>
                 <div class="x_content">
                     <table style="text-align: center" id="tabel_kriteria" class="table table-striped responsive-utilities jambo_table">
-                       <thead>
+                        <thead>
                             <tr>
                                 <th style="width: 7%; text-align: center">No</th>
                                 <!--<th style="width: 10%;text-align: center">ID Rak</th>-->
@@ -51,8 +51,8 @@
 </div>
 <footer>
     <div class="">
-        <p class="pull-right">Sistem Informasi Spesifikasi Kualitas Jamur Tiram |
-            <span class="lead"> <i class="fa fa-tree"></i> SI Jamur Tiram</span>
+        <p class="pull-right">Sistem Informasi Spesifikasi Kualitas Jamur Tiram  |
+            <span class="lead"> <i class="fa fa-tree"></i> SI Jamur Tiram </span>
         </p>
     </div>
     <div class="clearfix"></div>

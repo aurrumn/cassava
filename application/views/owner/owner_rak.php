@@ -1,18 +1,27 @@
 <div class="">
     <div class="row col-md-9 page-title">
         <div class="title_left">
-            <h3>Selamat Datang Pegawai,</h3>
+            <h3>Selamat Datang Owner,</h3>
         </div>
     </div>
-    <div class="clearfix"></div>
+   
 
 
-    <!-- tabel data kriteria -->
+    <!-- tabel rak jamur  -->
+    <?php
+    if ($this->session->flashdata('message') != null) {
+        ?>
+        <div class="alert alert-success alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            </button>
+            <strong><?php echo $this->session->flashdata('message'); ?></strong> 
+        </div>
+    <?php } ?>  
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Tabel Data Kriteria<small> Menampilkan Data Kriteria</small></h2>
+                    <h2>Tabel Rak Jamur</h2>
                     <ul class="nav navbar-right">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -20,26 +29,40 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <table style="text-align: center" id="tabel_kriteria" class="table table-striped responsive-utilities jambo_table">
-                       <thead>
+                    <table style="text-align: center" id="tabel_rak" class="table table-striped responsive-utilities jambo_table">
+                        <thead>
                             <tr>
                                 <th style="width: 7%; text-align: center">No</th>
-                                <!--<th style="width: 10%;text-align: center">ID Rak</th>-->
-                                <th style="text-align: center">Nama Kriteria</th>
-                                <th style="text-align: center">Sub Kriteria</th>
-                                <th style="text-align: center">Bobot</th>
+                                <!--<th style="width: 10%;text-align: center">ID rak</th>-->
+                                <th style="text-align: center">Nama</th>
+                                <th style="text-align: center">Lokasi</th>
+                                <th style="text-align: center">Tanggal</th>
+                                <th style="text-align: center">Status Keaktifan</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $no = 1;
-                            foreach ($data_kriteria->result_array() as $value) {
+                            foreach ($data_rak as $value) {
                                 ?>
                                 <tr>
                                     <td><?php echo $no++ ?></td>
-                                    <td><?php echo $value['kriteria']; ?> </td>
-                                    <td><?php echo $value['sub_kriteria']; ?></td>
-                                    <td><?php echo $value['bobot']; ?></td>
+                                    <!--<td><?php echo $value['id_rak'] ?></td>-->
+                                    <td><?php echo $value['nama_rak'] ?></td>
+                                    <td><?php echo $value['lokasi'] ?></td>
+                                    <td><?php echo $value['tgl_rak'] ?></td>
+                                    <td>
+                                        <?php if ($value['status'] == 'aktif') { ?>
+                                            <strong style="color: limegreen; font-size: 18px">
+                                                <?php echo $value['status']; ?></strong>
+                                        <?php } else {
+                                            ?>
+                                            <strong style="color: red" >
+                                                <?php echo $value['status']; ?> </strong> 
+                                            <?php
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -52,7 +75,7 @@
 <footer>
     <div class="">
         <p class="pull-right">Sistem Informasi Spesifikasi Kualitas Jamur Tiram |
-            <span class="lead"> <i class="fa fa-tree"></i> SI Jamur Tiram</span>
+            <span class="lead"> <i class="fa fa-tree"></i> SI Jamur Tiram </span>
         </p>
     </div>
     <div class="clearfix"></div>
@@ -62,10 +85,9 @@
 <script src="<?php echo base_url(); ?>assets/js/datatables/js/jquery.dataTables.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/datatables/tools/js/dataTables.tableTools.js"></script>
 
-<!-- dataTabel untuk tabel kriteria -->
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#tabelKriteria').DataTable({
+        $('#tabelRak').DataTable({
             "scrollX": true,
             responsive: true
         });
@@ -82,7 +104,7 @@
 
     var asInitVals = new Array();
     $(document).ready(function () {
-        var oTable = $('#tabel_kriteria').dataTable({
+        var oTable = $('#tabel_rak').dataTable({
             "oLanguage": {
                 "sSearch": "Search all columns:"
             },

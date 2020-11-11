@@ -59,17 +59,13 @@
         <!-- gauge js -->
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/gauge/gauge.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/gauge/gauge_demo.js"></script>
-        
         <!-- chart js -->
         <script src="<?php echo base_url(); ?>assets/js/chartjs/chart.min.js"></script>
-        
         <!-- bootstrap progress js -->
         <script src="<?php echo base_url(); ?>assets/js/progressbar/bootstrap-progressbar.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/nicescroll/jquery.nicescroll.min.js"></script>
-        
         <!-- icheck -->
         <script src="<?php echo base_url(); ?>assets/js/icheck/icheck.min.js"></script>
-        
         <!-- daterangepicker -->
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/moment.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/datepicker/daterangepicker.js"></script>
@@ -170,7 +166,7 @@
             icons.play();
         </script>
 
-      
+
         <!-- datepicker -->
         <script type="text/javascript">
             $(document).ready(function () {
@@ -244,16 +240,11 @@
                 });
             });
         </script>
-        
-        <!-- dataTabel untuk tabel Rak Jamur -->
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#tabelRak').DataTable({
-                    "scrollX": true,
-                    responsive: true
-                });
-            });
-        </script>
+
+        <!-- dataTabel untuk tabel rak jamur -->
+
+        <!-- dataTabel untuk tabel kriteria -->
+ 
 
         <script>
             NProgress.done();

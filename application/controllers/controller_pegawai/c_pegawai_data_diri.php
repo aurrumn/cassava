@@ -11,23 +11,23 @@ class c_pegawai_data_diri extends CI_Controller {
     }
 
     function index() {
-        if ($this->cekLogin() == FALSE) {
-            redirect(base_url());
-        } else {
+        // if ($this->cekLogin() == FALSE) {
+        //     redirect(base_url());
+        // } else {
             $id_loged_user = $this->session->userdata('id_user');
             $data['data_diri'] = $this->m_pegawai_data_diri->ambil_data_pegawai("user", "id_user = '$id_loged_user'");
             $this->template->pegawaiview('pegawai/pegawai_data_diri', $data);
-        }
+        // }
     }
 
     // fungsi pengecekan login agar user tidak bisa loncat ke halaman ini tanpa login terlebih dahulu
-    function cekLogin() {
-        if ($this->session->userdata('login') == FALSE) {
-            return FALSE;
-        } else {
-            return TRUE;
-        }
-    }
+    // function cekLogin() {
+    //     if ($this->session->userdata('login') == FALSE) {
+    //         return FALSE;
+    //     } else {
+    //         return TRUE;
+    //     }
+    // }
 
     // fungsi edit data diri pegawai
     function edit_data_diri($id) {

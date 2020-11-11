@@ -9,13 +9,13 @@ class Template
       $this->ci =&get_instance();
    }
 
-   function juraganview($template, $data='')
+   function ownerview($template, $data='')
    {
 
       $data['content'] = $this->ci->load->view($template, $data, TRUE);
-      $data['nav']  = $this->ci->load->view('juragan/juragannav', $data, TRUE);
+      $data['nav']  = $this->ci->load->view('owner/ownernav', $data, TRUE);
 
-      $this->ci->load->view('juragan/dashboard', $data);
+      $this->ci->load->view('owner/dashboard', $data);
 
    }
    

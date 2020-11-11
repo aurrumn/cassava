@@ -12,7 +12,6 @@ class m_login extends CI_Model {
     function cekExistensiUsername($table, $where) {
         $this->db->from($table);
         $this->db->where($where);
-
         return $this->db->get();
     }
 

@@ -2,25 +2,25 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class c_pegawai_core extends CI_Controller {
+class c_owner_core extends CI_Controller {
 
     function __construct() {
         parent::__construct();
         $this->load->library('template');
-        $this->load->model('model_pegawai/m_pegawai_core');
+         $this->load->model('model_pegawai/m_pegawai_core');
         $this->load->model('model_pegawai/m_pegawai_jamur');
     }
 
     function index() {
-        if ($this->cekLogin() == FALSE) {
-            redirect(base_url());
-        } else {
-            $this->emptying_message();
-            $id_loged_user = $this->session->userdata('id_user');
+        // if ($this->cekLogin() == FALSE) {
+        //     redirect(base_url());
+        // } else {
+        //     $this->emptying_message();
+        //     $id_loged_user = $this->session->userdata('id_user');
             $data['promethee'] = $this->m_pegawai_core->ambil_data_promethee();
-            $this->template->pegawaiview('pegawai/pegawai_jamur_core', $data);
+            $this->template->ownerview('owner/owner_core', $data);
         }
-    }
+    // }
 
     // fungsi pengecekan login agar user tidak bisa loncat ke halaman ini tanpa login terlebih dahulu
     function cekLogin() {
@@ -31,31 +31,16 @@ class c_pegawai_core extends CI_Controller {
         }
     }
 
-    // fungsi CORE SYSTEM
-    function core() {
-        $id_loged_user = $this->session->userdata('id_user');
-        $data['promethee'] = $this->m_pegawai_core->ambil_data_promethee();
-        if ($this->m_pegawai_core->system_core($id_loged_user) == TRUE) {
-            $this->session->set_flashdata('message', 'PENGHITUNGAN PROMETHEE BERHASIL');
-            $data['promethee'] = $this->m_pegawai_core->ambil_data_promethee();
-            $this->template->pegawaiview('pegawai/pegawai_jamur_core', $data);
-        } else {
-            $this->session->set_flashdata('message_gagal', 'GAGAL | Data jamur Tidak Memenuhi Minimal Kuota Penghitungan');
-            $this->template->pegawaiview('pegawai/pegawai_jamur_core', $data);
-        }
-    }
-
     // fungsi ini digunakan untuk mengkosongkan pesan
     function emptying_message() {
         $this->session->set_flashdata('message', NULL);
         $this->session->set_flashdata('message_gagal', NULL);
     }
 
-    // fungsi ini digunakan untuk menampilkan detail dari penghitungan Promethee
     function lihat_detail_promethee($id_promethee) {
         // ambil id jamurnya
-        $t_jamur_promethee = "jamur j JOIN promethee p ON (j.id_jamur = p.id_jamur)";
-        $identitas_jamur = $this->m_pegawai_jamur->select_where(array('j.id_jamur'), $t_jamur_promethee, "id_promethee = '$id_promethee'");
+        $t_jamur_promethee = "jamur s JOIN promethee p ON (s.id_jamur = p.id_jamur)";
+        $identitas_jamur = $this->m_pegawai_jamur->select_where(array('s.id_jamur'), $t_jamur_promethee, "id_promethee = '$id_promethee'");
 
         foreach ($identitas_jamur->result() as $key) {
             $data['id_jamur'] = $key->id_jamur;
@@ -95,7 +80,7 @@ class c_pegawai_core extends CI_Controller {
 
             $data['tanggal_periksa'] = $key->tanggal_periksa;
         }
-        
+
         // mengambil data penilaian
         $tabel_penilaian = "periksa p JOIN detail_periksa dp ON (p.id_periksa = dp.id_periksa) "
                 . "JOIN sub_kriteria sk ON (dp.id_subkriteria = sk.id_sub_kriteria)";
@@ -108,7 +93,7 @@ class c_pegawai_core extends CI_Controller {
         // mengambil nama kriteria
         $data['nama_kriteria'] = $this->m_pegawai_jamur->select_all("kriteria");
 
-        
+
         // mengambil detail penilaian promethee
         $select_promethee = "pro.leaving_flow, pro.entering_flow, pro.net_flow as nilai_promethee, pro.tanggal_penghitungan as tanggal_promethee, "
                 . "u.nama as petugas_promethee, u.alamat as alamat_petugas_promethee, u.telephone as telepon_petugas_promethee ";
@@ -121,13 +106,13 @@ class c_pegawai_core extends CI_Controller {
             $data['entering_flow'] = $key->entering_flow;
             $data['nilai_promethee'] = $key->nilai_promethee;
             $data['tanggal_promethee'] = $key->tanggal_promethee;
-            
+
             $data['petugas_promethee'] = $key->petugas_promethee;
             $data['alamat_petugas_promethee'] = $key->alamat_petugas_promethee;
             $data['telepon_petugas_promethee'] = $key->telepon_petugas_promethee;
         }
         $data['id_promethee'] = $id_promethee;
-        $this->template->pegawaiview('pegawai/pegawai_jamur_core_detail', $data);
+        $this->template->ownerview('owner/owner_core_detail', $data);
     }
 
 }

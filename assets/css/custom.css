@@ -370,7 +370,8 @@ dark,
 
 body {
     color: #73879C;
-    background: #2A3F54;
+    /* background: #2A3F54; */
+    background: #3d1d2c;
     /*#ECF0F1; #FCFCFC*/
     
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;

@@ -19,7 +19,6 @@ class c_login extends CI_Controller {
 
     function masuksistem() {
         // menghapus pesan peringatan
-        $this->hapusPesanPeringatan();
 
         // mengambil nilai inputan
         $username = $this->input->post('username');
@@ -27,6 +26,7 @@ class c_login extends CI_Controller {
 
         //pengecekan jika inputan kosong
         if ($username == "" || $pass == "") {
+            // $this->hapusPesanPeringatan();
             $this->session->set_flashdata('message', 'Gagal LOGIN, Username atau Pasword KOSONG');
             redirect(base_url() . 'c_login');
         } else {
@@ -34,9 +34,10 @@ class c_login extends CI_Controller {
             // mendeteksi apakah user terdaftar dan aktif di database
             $deteksiUser = $this->m_login->cekExistensiUsername('user', "username ='$username' and password ='$pass' and status_aktif = 1");
             if ($deteksiUser->num_rows() > 0) {
-                // mengambil nilai password dari database berdasarkan username yang diinputkan
+        //         // mengambil nilai password dari database berdasarkan username yang diinputkan
                 $passDB = $this->m_login->getPass($username);
-                // melakukn pengecekan apakah password yang diinputkan sama dengan password yang ada pada database
+                // echo $passDB;
+        //         // melakukn pengecekan apakah password yang diinputkan sama dengan password yang ada pada database
                 if ($this->cekPass($pass, $passDB) == TRUE) {
                     // mengambil data user yang aktif dari database
                     $data = $deteksiUser->row();
@@ -45,14 +46,13 @@ class c_login extends CI_Controller {
                     $datauser = array(
                         'id_user' => $data->id_user,
                         'nama_user' => $data->nama,
-                        'login' => TRUE
+                        'login' => 1
                     );
                     $this->session->set_userdata($datauser);
                     // mengecek level akses user yang login
                     if ($this->m_login->deteksiLevelAkses($username, $pass) == 1) {
                         // jika yang login itu BOS
-                        redirect(base_url() . 'controller_juragan/c_juragan_petani');
-
+                        redirect(base_url() . 'controller_owner/c_owner_rak');
                     } else {
                         // jika yang login pegawai
                         redirect(base_url() . 'controller_pegawai/c_pegawai_data_diri');
