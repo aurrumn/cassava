@@ -30,7 +30,8 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Tabel Rak Jamur<small> Menampilkan Semua Data Rak</small></h2>
+                    <h2>Tabel Rak Jamur<small> Menampilkan Semua Data Rak</small>
+                    </h2>
                     <ul class="nav navbar-right">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -38,6 +39,8 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
+                    
+                <a style="font-size:18px; color:green" href="<?php echo base_url(); ?>c_pendaftaran_rak" style="color:white" class="to_register"><button type="button" class="btn btn-success"><i class="fa fa-form">Daftarkan Rak</button></a>
                     <br>
                     <table style="text-align: center" id="tabel_rak" class="table table-striped responsive-utilities jambo_table">
                         <thead>
@@ -46,7 +49,7 @@
                                 <!--<th style="width: 10%;text-align: center">ID rak</th>-->
                                 <th style="text-align: center">Nama</th>
                                 <th style="text-align: center">Lokasi</th>
-                                <th style="text-align: center">Tanggal</th>
+                                <th style="text-align: center">Tanggal Pembuatan</th>
                                 <th style="text-align: center">Status Keaktifan</th>
                                 <th style="text-align: center">Aksi</th>
                             </tr>

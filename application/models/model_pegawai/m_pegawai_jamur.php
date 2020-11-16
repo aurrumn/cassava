@@ -27,7 +27,7 @@ class m_pegawai_jamur extends CI_Model {
         $this->db->from(
             'jamur j JOIN rakjamur r ON (j.id_rak = r.id_rak) 
             JOIN user u ON (j.id_petugas = u.id_user) 
-            JOIN status_jamurt sj ON (j.status_jamur = sj.id_status)'
+            JOIN status_jamur sj ON (j.status_jamur = sj.id_status)'
         );
 
         $this->db->order_by('tanggal_masuk DESC');

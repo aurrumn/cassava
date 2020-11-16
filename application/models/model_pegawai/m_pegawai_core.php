@@ -24,9 +24,9 @@ class m_pegawai_core extends CI_Model {
                         JOIN detail_periksa d
                             ON p.id_periksa = d.id_periksa
                         JOIN (
-                                SELECT * FROM sub_kriteria ORDER BY id_kriteria ASC, id_sub_kriteria ASC
+                                SELECT * FROM sub_kriteria ORDER BY id_kriteria ASC, id_subkriteria ASC
                             ) sk
-                            on sk.id_sub_kriteria = d.id_subkriteria
+                            on sk.id_subkriteria = d.id_subkriteria
                     WHERE
                         j.status_jamur = 2
                     GROUP BY
