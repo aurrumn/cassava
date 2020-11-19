@@ -69,23 +69,20 @@ class c_owner_pegawai_tambah extends CI_Controller
                     //membuat pesan data berhasil disimpan
                     $this->session->set_flashdata('message', 'Data Pegawai Baru Berhasil Ditambahkan');
                     // mengarahkan ke tampilan data pegawai
-                    // redirect(base_url() . 'controller_owner/c_owner_pegawai');
-                    $this->template->ownerview('owner/owner_pegawai_tambah', null);
+                    redirect(base_url() . 'controller_owner/c_owner_pegawai');
                 } else {
                     // ini jika data tidak berhasil diinputkan
                     echo '<script type="text/javascript">alert("Penamabahan data GAGAL");</script>';
-                    // redirect(base_url() . 'controller_owner/c_owner_pegawai_tambah');
-                    $this->template->ownerview('owner/owner_pegawai_tambah', null);
+                    redirect(base_url() . 'controller_owner/c_owner_pegawai_tambah');
                 }
             } else {
                 $this->session->set_flashdata('message_error', 'Maaf, Username Telah Digunakan');
                 // mengarahkan ke tampilan data pegawai
-                // redirect(base_url() . 'controller_owner/c_owner_pegawai_tambah');
-                $this->template->ownerview('owner/owner_pegawai_tambah', null);
+                redirect(base_url() . 'controller_owner/c_owner_pegawai_tambah');
             }
         } else {
             // ini jika data yang diinputkan tidak sesuai dengan validasi form
-            $this->template->ownerview('owner/owner_pegawai_tambah', null);
+            $this->template->ownerview('owner/owner_pegawai_tambah');
         }
     }
 }

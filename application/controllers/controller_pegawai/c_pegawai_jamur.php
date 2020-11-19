@@ -114,7 +114,7 @@ class c_pegawai_jamur extends CI_Controller {
         // mengambil data nama nama kriteria yang ada di databse untuk di jadikan labe dalam form
         $data['kriteria'] = $this->m_pegawai_jamur->select_all_order_by("kriteria", "id_kriteria");
         // mengambil subkriteria dan masing-masing nilainya
-        $data['sub_kriteria'] = $this->m_pegawai_jamur->select_all_order_by("sub_kriteria", "id_subkriteria");
+        $data['sub_kriteria'] = $this->m_pegawai_jamur->select_all_order_by("sub_kriteria", "id_sub_kriteria");
 
         // memanggil atau menampilkan form penilaian jamur
         $this->template->pegawaiview('pegawai/pegawai_jamur_penilaian', $data);
@@ -158,10 +158,10 @@ class c_pegawai_jamur extends CI_Controller {
 
         //mengambil data jamur untuk ditampilkan detailnya
         $tabel_jamur = "jamur j JOIN rakjamur r ON(j.id_rak = r.id_rak) "
-                . "JOIN user u ON (j.id_petugas = u.id_user) "
+                . "JOIN user u ON (s.id_petugas = u.id_user) "
                 . "JOIN status_jamur sj ON (j.status_jamur = sj.id_status)";
 
-        $select_data_jamur = "r.nama_rak , r.lokasi as lokasi, r.tgl_rak as tanggal,"
+        $select_data_jamur = "r.nama_rak as nama , r.lokasi as lokasi, r.tgl_rak as tanggal,"
                 . "j.id_petugas, u.nama as petugas, u.telephone as kontak_petugas,"
                 . "j.tanggal_masuk, j.berat,"
                 . "sj.keterangan";
@@ -169,7 +169,7 @@ class c_pegawai_jamur extends CI_Controller {
 
         foreach ($detail_jamur->result() as $key) {
             $data['nama_rak'] = $key->nama_rak;
-            $data['lokasi'] = $key->lokasi;
+            $data['lokasi'] = $key->alamat_lokasi;
             $data['tgl_rak'] = $key->tanggal;
 
             $data['petugas'] = $key->petugas;
@@ -184,16 +184,14 @@ class c_pegawai_jamur extends CI_Controller {
 
         // mengambil data penilaian
         $tabel_penilaian = "periksa p JOIN detail_periksa dp ON (p.id_periksa = dp.id_periksa) "
-                . "JOIN sub_kriteria sk ON (dp.id_subkriteria = sk.id_subkriteria)";
+                . "JOIN sub_kriteria sk ON (dp.id_subkriteria = sk.id_sub_kriteria)";
         $data['detail_penilaian'] = $this->m_pegawai_jamur->get_where($tabel_penilaian, "p.id_jamur = '$id_jamur'");
 
-        $periksa = $this->m_pegawai_jamur
-        ->select_where(array('id_periksa','tanggal'), "periksa", "id_jamur = '$id_jamur'");
+        $periksa = $this->m_pegawai_jamur->select_where(array('id_periksa','tanggal'), "periksa", "id_jamur = '$id_jamur'");
         foreach ($periksa->result() as $key) {
             $data['id_periksa'] = $key->id_periksa;
             $data['tanggal_periksa'] = $key->tanggal;
         }
-
         // mengambil nama kriteria
         $data['nama_kriteria'] = $this->m_pegawai_jamur->select_all("kriteria");
 
@@ -202,14 +200,14 @@ class c_pegawai_jamur extends CI_Controller {
 
     function go_edit_penilaian($id_periksa) {
         $tabel_data_lama = "sub_kriteria sk "
-                . "JOIN detail_periksa dp ON(sk.id_subkriteria = dp.id_subkriteria) "
+                . "JOIN detail_periksa dp ON(sk.id_sub_kriteria = dp.id_subkriteria) "
                 . "JOIN kriteria k ON (sk.id_kriteria = k.id_kriteria) ";
         $data['data_lama'] = $this->m_pegawai_jamur->get_where($tabel_data_lama, "id_periksa = '$id_periksa'");
 
         // mengambil data nama nama kriteria yang ada di databse untuk di jadikan labe dalam form
         $data['kriteria'] = $this->m_pegawai_jamur->select_all_order_by("kriteria", "id_kriteria");
         // mengambil subkriteria dan masing-masing nilainya
-        $data['sub_kriteria'] = $this->m_pegawai_jamur->select_all_order_by("sub_kriteria", "id_subkriteria");
+        $data['sub_kriteria'] = $this->m_pegawai_jamur->select_all_order_by("sub_kriteria", "id_sub_kriteria");
 
         $this->template->pegawaiview('pegawai/pegawai_jamur_penilaian_ubah', $data);
     }

@@ -72,8 +72,8 @@ class c_pegawai_core extends CI_Controller {
 
         $tabel_detail = "jamur j "
                 . "JOIN status_jamur sj ON (j.status_jamur = sj.id_status) "
-                . "JOIN rakjamur rk ON (j.id_rak = rk.id_rak) "
-                . "JOIN user u ON (j.id_petugas = u.id_user) "
+                . "JOIN rak rk ON (j.id_rak = rk.id_rak) "
+                . "JOIN user u ON (s.id_petugas = u.id_user) "
                 . "JOIN periksa pj ON (j.id_jamur = pj.id_jamur) ";
 
         $where_detail = "j.id_jamur ='$id_jamur'";
@@ -85,7 +85,7 @@ class c_pegawai_core extends CI_Controller {
             $data['berat'] = $key->berat;
             $data['status'] = $key->status;
 
-            $data['rak'] = $key->rak;
+            $data['nama_rak'] = $key->rak;
             $data['lokasi'] = $key->lokasi;
             $data['tgl_rak'] = $key->tanggal;
 
@@ -98,7 +98,7 @@ class c_pegawai_core extends CI_Controller {
         
         // mengambil data penilaian
         $tabel_penilaian = "periksa p JOIN detail_periksa dp ON (p.id_periksa = dp.id_periksa) "
-                . "JOIN sub_kriteria sk ON (dp.id_subkriteria = sk.id_subkriteria)";
+                . "JOIN sub_kriteria sk ON (dp.id_subkriteria = sk.id_sub_kriteria)";
         $data['detail_penilaian'] = $this->m_pegawai_jamur->get_where($tabel_penilaian, "p.id_jamur = '$id_jamur'");
 
         $periksa = $this->m_pegawai_jamur->select_where(array('id_periksa'), "periksa", "id_jamur = '$id_jamur'");
@@ -110,7 +110,7 @@ class c_pegawai_core extends CI_Controller {
 
         
         // mengambil detail penilaian promethee
-        $select_promethee = "pro.leaving_flow, pro.entering_flow, pro.net_flow as nilai_promethee, pro.tanggal_perhitungan as tanggal_promethee, "
+        $select_promethee = "pro.leaving_flow, pro.entering_flow, pro.net_flow as nilai_promethee, pro.tanggal_penghitungan as tanggal_promethee, "
                 . "u.nama as petugas_promethee, u.alamat as alamat_petugas_promethee, u.telephone as telepon_petugas_promethee ";
         $tabel_promethee = "promethee pro JOIN user u ON (pro.petugas = u.id_user)";
         $where_promethee = "pro.id_promethee = '$id_promethee'";

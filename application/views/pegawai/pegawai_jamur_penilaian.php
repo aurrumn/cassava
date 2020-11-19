@@ -95,7 +95,7 @@
                                         <?php
                                         foreach ($sub_kriteria->result_array() as $key) {
                                             if ($key['id_kriteria'] == $value['id_kriteria']) {
-                                                echo "<option value =" . $key['id_subkriteria'] . ">" . $key['sub_kriteria'] . "</option>";
+                                                echo "<option value =" . $key['id_sub_kriteria'] . ">" . $key['sub_kriteria'] . "</option>";
                                             }
                                         }
                                         ?>

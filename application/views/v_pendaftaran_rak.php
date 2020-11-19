@@ -56,8 +56,8 @@
                                 <div class="x_panel">
                                     <div class="x_title">
                                         <h3>Formulir Pendaftaran <small>| mohon isi semua data</small></h3>
-                                        <a style="float: right" href="<?php echo base_url(); ?>controller_pegawai/c_pegawai_rak">
-                                            <br>Kembali Ke Halaman Rak Jamur <i style="font-size: 22px" class="fa fa-sign-in"></i>
+                                        <a style="float: right" href="<?php echo base_url(); ?>">
+                                            <br>Kembali Ke Halaman Login <i style="font-size: 22px" class="fa fa-sign-in"></i>
                                         </a>
                                     </div>
                                     <div class="x_content">
@@ -80,16 +80,43 @@
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                                     <input type="text" id="nama-rak" name="nama-rak" required="required" class="form-control col-md-7 col-xs-12">
-                                                    <p style="color: tomato">nama rak minimal 5 - 30 karakter alphanumeric kobinasi tandabaca, termasuk spasi</p>
-                                                    <p style="color: tomato">tanda baca yang bisa digunakan adalah . - ( )</p>
+                                                    <p style="color: tomato">nama rak minimal 3 huruf, maksimal 20 huruf termasuk spasi</p>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat">Lokasi <span class="required">*</span>
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat">Alamat <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input type="text" id="lokasi" name="lokasi" required="required" class="form-control col-md-7 col-xs-12">
-                                                    <p style="color: tomato">lokasi rak minimal 5 huruf, maksimal 70 huruf termasuk spasi</p>
+                                                    <input type="text" id="alamat" name="alamat" required="required" class="form-control col-md-7 col-xs-12">
+                                                    <p style="color: tomato">alamat rak minimal 5 huruf, maksimal 100 huruf termasuk spasi</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Lahir <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input id="tglLahir" name="tglLahir" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+                                                    <p style="color: tomato">format tanggal : bulan / hari / tahun </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Telepon / Kontak <span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">    
+                                                    <input id="telepon-kontak" name="telepon-kontak" class="form-control col-md-7 col-xs-12"  required="required" type="text" name="telepon-kontak">
+                                                    <p style="color: tomato">minimal 11 digit, maksimal 13 digit</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <div id="gender" class="btn-group" data-toggle="buttons">
+                                                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                            <input type="radio" name="gender" value="1" checked> &nbsp; Pria &nbsp;
+                                                        </label>
+                                                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                            <input type="radio" name="gender" value="2"> Wanita
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">

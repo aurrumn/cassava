@@ -78,8 +78,8 @@
                                 <tr>
                                     <!--<td style="vertical-align: middle"><?php echo $no++ ?></td>-->
                                     <td style="vertical-align: middle"><?php echo $value['id_promethee'] ?></td>
-                                    <td style="vertical-align: middle"><?php echo $value['rak'] ?></td>
-                                    <td style="vertical-align: middle"><?php echo $value['tgl_rak'] ?></td>
+                                    <td style="vertical-align: middle"><?php echo $value['rakjamur'] ?></td>
+                                    <td style="vertical-align: middle"><?php echo $value['tanggal_masuk'] ?></td>
                                     <td style="vertical-align: middle"><?php echo $value['tanggal_penilaian'] ?></td>
                                     <td style="vertical-align: middle"><?php echo $value['tanggal_promethee'] ?></td>
                                     <td style="vertical-align: middle"><?php echo $value['leaving_flow'] ?></td>

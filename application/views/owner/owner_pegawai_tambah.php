@@ -51,7 +51,7 @@
                 </div>
                 <div class="x_content">
                    
-                    <form role="form" method="post" id="registrationForm" action="<?php echo base_url(); ?>controller_owner/c_owner_pegawai_tambah/tambah_pegawai"  class="form-horizontal form-label-left">
+                    <form role="form" method="post" id="registrationForm" action="<?php echo base_url(); ?>controller_juragan/c_juragan_pegawai_tambah/tambah_pegawai"  class="form-horizontal form-label-left">
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username
                             </label>
@@ -103,7 +103,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                 <button style="width: 200px" name="submit" type="submit" class="btn btn-success">Submit</button>
-                                 <a href="<?php echo base_url(); ?>controller_owner/c_owner_pegawai_tambah"><i class="fa fa-refresh"></i> Batalkan Pedaftaran</a>
+                                 <a href="<?php echo base_url(); ?>controller_juragan/c_juragan_pegawai_tambah"><i class="fa fa-refresh"></i> Batalkan Pedaftaran</a>
                             </div>
                         </div> 
                     </form>

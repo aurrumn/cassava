@@ -79,7 +79,7 @@
                                 <label style="font-size: 16px" class="control-label col-md-4 col-sm-4 col-xs-12"> - Lokasi ak  </label>
                                 <label style="font-size: 16px" class="control-label col-md-1 col-sm-1 col-xs-12"> : </label>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
-                                    <p style="font-size: 16px" ><?php echo $lokasi ?>
+                                    <p style="font-size: 16px" ><?php echo $lokasi_Rak ?>
                                 </div>
                             </div>
                             <div class="form-group">

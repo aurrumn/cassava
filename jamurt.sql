@@ -1,384 +1,411 @@
--- MariaDB dump 10.17  Distrib 10.4.6-MariaDB, for Win64 (AMD64)
+-- phpMyAdmin SQL Dump
+-- version 4.9.0.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: jamurt
--- ------------------------------------------------------
--- Server version	10.4.6-MariaDB
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 16 Agu 2020 pada 00.08
+-- Versi server: 10.4.6-MariaDB
+-- Versi PHP: 7.3.9
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `detail_periksa`
+-- Database: `jamurt`
 --
 
-DROP TABLE IF EXISTS `detail_periksa`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `detail_periksa`
+--
+
 CREATE TABLE `detail_periksa` (
-  `id_detail_periksa` int(5) NOT NULL AUTO_INCREMENT,
+  `id_detail_periksa` int(5) NOT NULL,
   `id_periksa` int(5) NOT NULL,
-  `id_subkriteria` int(2) NOT NULL,
-  PRIMARY KEY (`id_detail_periksa`),
-  UNIQUE KEY `id_periksa` (`id_periksa`,`id_subkriteria`),
-  KEY `id_subkriteria` (`id_subkriteria`),
-  CONSTRAINT `detail_periksa_ibfk_1` FOREIGN KEY (`id_subkriteria`) REFERENCES `sub_kriteria` (`id_sub_kriteria`),
-  CONSTRAINT `detail_periksa_ibfk_2` FOREIGN KEY (`id_periksa`) REFERENCES `periksa` (`id_periksa`)
+  `id_subkriteria` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `detail_periksa`
+-- Struktur dari tabel `gender`
 --
 
-LOCK TABLES `detail_periksa` WRITE;
-/*!40000 ALTER TABLE `detail_periksa` DISABLE KEYS */;
-/*!40000 ALTER TABLE `detail_periksa` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `gender`
---
-
-DROP TABLE IF EXISTS `gender`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `gender` (
-  `id_gender` int(1) NOT NULL AUTO_INCREMENT,
-  `keterangan` varchar(10) NOT NULL,
-  PRIMARY KEY (`id_gender`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id_gender` int(1) NOT NULL,
+  `keterangan` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `gender`
+-- Dumping data untuk tabel `gender`
 --
 
-LOCK TABLES `gender` WRITE;
-/*!40000 ALTER TABLE `gender` DISABLE KEYS */;
-INSERT INTO `gender` VALUES (1,'Pria'),(2,'Wanita');
-/*!40000 ALTER TABLE `gender` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `gender` (`id_gender`, `keterangan`) VALUES
+(1, 'Laki'),
+(2, 'Puan'),
+(3, 'Laki'),
+(4, 'Puan');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `jamur`
+-- Struktur dari tabel `jamur`
 --
 
-DROP TABLE IF EXISTS `jamur`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `jamur` (
-  `id_jamur` int(5) NOT NULL AUTO_INCREMENT,
+  `id_jamur` int(5) NOT NULL,
   `id_rak` int(3) NOT NULL,
   `id_petugas` int(5) NOT NULL,
   `tanggal_masuk` date NOT NULL,
   `berat` int(5) NOT NULL,
-  `status_jamur` int(1) NOT NULL,
-  PRIMARY KEY (`id_jamur`)
+  `status_jamur` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `jamur`
+-- Struktur dari tabel `kriteria`
 --
 
-LOCK TABLES `jamur` WRITE;
-/*!40000 ALTER TABLE `jamur` DISABLE KEYS */;
-/*!40000 ALTER TABLE `jamur` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `jamur_old`
---
-
-DROP TABLE IF EXISTS `jamur_old`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `jamur_old` (
-  `id_jamur` int(5) NOT NULL AUTO_INCREMENT,
-  `id_rak` int(3) NOT NULL,
-  `id_petugas` int(5) NOT NULL,
-  `tanggal_masuk` date NOT NULL,
-  `berat` int(5) NOT NULL,
-  `status_jamur` int(1) NOT NULL,
-  PRIMARY KEY (`id_jamur`),
-  UNIQUE KEY `id_rak` (`id_rak`,`id_petugas`),
-  UNIQUE KEY `status_jamur` (`status_jamur`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `jamur_old`
---
-
-LOCK TABLES `jamur_old` WRITE;
-/*!40000 ALTER TABLE `jamur_old` DISABLE KEYS */;
-/*!40000 ALTER TABLE `jamur_old` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `kriteria`
---
-
-DROP TABLE IF EXISTS `kriteria`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `kriteria` (
-  `id_kriteria` int(2) NOT NULL AUTO_INCREMENT,
-  `kriteria` varchar(20) NOT NULL,
-  PRIMARY KEY (`id_kriteria`)
+  `id_kriteria` int(2) NOT NULL,
+  `kriteria` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `kriteria`
+-- Struktur dari tabel `levelakses`
 --
 
-LOCK TABLES `kriteria` WRITE;
-/*!40000 ALTER TABLE `kriteria` DISABLE KEYS */;
-/*!40000 ALTER TABLE `kriteria` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `levelakses`
---
-
-DROP TABLE IF EXISTS `levelakses`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `levelakses` (
-  `id_akses` int(1) NOT NULL AUTO_INCREMENT,
-  `keterangan_akses` varchar(20) NOT NULL,
-  PRIMARY KEY (`id_akses`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id_akses` int(1) NOT NULL,
+  `keterangan_akses` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `levelakses`
+-- Struktur dari tabel `periksa`
 --
 
-LOCK TABLES `levelakses` WRITE;
-/*!40000 ALTER TABLE `levelakses` DISABLE KEYS */;
-INSERT INTO `levelakses` VALUES (1,'Owner'),(2,'Karyawan');
-/*!40000 ALTER TABLE `levelakses` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `periksa`
---
-
-DROP TABLE IF EXISTS `periksa`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `periksa` (
-  `id_periksa` int(5) NOT NULL AUTO_INCREMENT,
+  `id_periksa` int(5) NOT NULL,
   `id_jamur` int(5) NOT NULL,
   `tanggal` date NOT NULL,
-  `id_petugas` int(5) NOT NULL,
-  PRIMARY KEY (`id_periksa`),
-  UNIQUE KEY `id_jamur` (`id_jamur`,`id_petugas`),
-  CONSTRAINT `periksa_ibfk_1` FOREIGN KEY (`id_jamur`) REFERENCES `jamur_old` (`id_jamur`)
+  `id_petugas` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `periksa`
+-- Struktur dari tabel `promethee`
 --
 
-LOCK TABLES `periksa` WRITE;
-/*!40000 ALTER TABLE `periksa` DISABLE KEYS */;
-/*!40000 ALTER TABLE `periksa` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `promethee`
---
-
-DROP TABLE IF EXISTS `promethee`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `promethee` (
-  `id_promethee` int(7) NOT NULL AUTO_INCREMENT,
+  `id_promethee` int(7) NOT NULL,
   `id_jamur` int(5) NOT NULL,
   `leaving_flow` double NOT NULL,
   `entering_flow` double NOT NULL,
   `net_flow` double NOT NULL,
   `tanggal_perhitungan` date NOT NULL,
-  `petugas` int(5) NOT NULL,
-  PRIMARY KEY (`id_promethee`),
-  UNIQUE KEY `id_jamur` (`id_jamur`,`petugas`),
-  KEY `petugas` (`petugas`),
-  CONSTRAINT `promethee_ibfk_1` FOREIGN KEY (`id_jamur`) REFERENCES `jamur_old` (`id_jamur`)
+  `petugas` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `promethee`
+-- Struktur dari tabel `rakjamur`
 --
 
-LOCK TABLES `promethee` WRITE;
-/*!40000 ALTER TABLE `promethee` DISABLE KEYS */;
-/*!40000 ALTER TABLE `promethee` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `rakjamur`
---
-
-DROP TABLE IF EXISTS `rakjamur`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rakjamur` (
-  `id_rak` int(3) NOT NULL AUTO_INCREMENT,
-  `nama_rak` varchar(50) NOT NULL,
+  `id_rak` int(3) NOT NULL,
+  `nama_rak` varchar(30) NOT NULL,
   `lokasi` varchar(70) NOT NULL,
   `tgl_rak` date NOT NULL,
-  `status_aktif` int(1) NOT NULL,
-  PRIMARY KEY (`id_rak`),
-  KEY `status_aktif` (`status_aktif`),
-  CONSTRAINT `rakjamur_ibfk_1` FOREIGN KEY (`status_aktif`) REFERENCES `statusaktif` (`id_aktif`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `rakjamur`
---
-
-LOCK TABLES `rakjamur` WRITE;
-/*!40000 ALTER TABLE `rakjamur` DISABLE KEYS */;
-INSERT INTO `rakjamur` VALUES (1,'Rak Umum1 (U1)','Gedung A Lorong 1','2020-11-15',1),(2,'Rak Khusus(1)','Gedung B Lorong 1','2020-11-15',1),(3,'Rak Umum2','Gedung C Lorong 2','2020-11-15',1);
-/*!40000 ALTER TABLE `rakjamur` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `status_jamurt`
---
-
-DROP TABLE IF EXISTS `status_jamurt`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `status_jamurt` (
-  `id_status` int(1) NOT NULL AUTO_INCREMENT,
-  `keterangan` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_status`),
-  CONSTRAINT `status_jamurt_ibfk_1` FOREIGN KEY (`id_status`) REFERENCES `jamur_old` (`status_jamur`)
+  `jenis_kelamin` int(1) NOT NULL,
+  `status_aktif` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `status_jamurt`
+-- Struktur dari tabel `statusaktif`
 --
 
-LOCK TABLES `status_jamurt` WRITE;
-/*!40000 ALTER TABLE `status_jamurt` DISABLE KEYS */;
-/*!40000 ALTER TABLE `status_jamurt` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `statusaktif`
---
-
-DROP TABLE IF EXISTS `statusaktif`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `statusaktif` (
-  `id_aktif` int(1) NOT NULL AUTO_INCREMENT,
-  `keterangan_aktif` varchar(10) NOT NULL,
-  PRIMARY KEY (`id_aktif`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id_aktif` int(1) NOT NULL,
+  `keterangan_aktif` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `statusaktif`
+-- Struktur dari tabel `status_jamurt`
 --
 
-LOCK TABLES `statusaktif` WRITE;
-/*!40000 ALTER TABLE `statusaktif` DISABLE KEYS */;
-INSERT INTO `statusaktif` VALUES (1,'Aktif'),(2,'Nonaktif');
-/*!40000 ALTER TABLE `statusaktif` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `status_jamurt` (
+  `id_status` int(1) NOT NULL,
+  `keterangan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `sub_kriteria`
+-- Struktur dari tabel `sub_kriteria`
 --
 
-DROP TABLE IF EXISTS `sub_kriteria`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sub_kriteria` (
-  `id_sub_kriteria` int(2) NOT NULL AUTO_INCREMENT,
+  `id_sub_kriteria` int(2) NOT NULL,
   `id_kriteria` int(2) NOT NULL,
   `sub_kriteria` varchar(70) NOT NULL,
-  `bobot` int(3) NOT NULL,
-  PRIMARY KEY (`id_sub_kriteria`),
-  UNIQUE KEY `id_kriteria` (`id_kriteria`),
-  CONSTRAINT `sub_kriteria_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `kriteria` (`id_kriteria`)
+  `bobot` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `sub_kriteria`
+-- Struktur dari tabel `user`
 --
 
-LOCK TABLES `sub_kriteria` WRITE;
-/*!40000 ALTER TABLE `sub_kriteria` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sub_kriteria` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `id_user` int(5) NOT NULL AUTO_INCREMENT,
+  `id_user` int(5) NOT NULL,
   `username` varchar(10) NOT NULL,
   `password` varchar(10) NOT NULL,
   `nama` varchar(30) NOT NULL,
   `alamat` varchar(30) NOT NULL,
-  `telephone` varchar(12) NOT NULL,
   `jenis_kelamin` int(1) NOT NULL,
+  `telephone` varchar(12) NOT NULL,
   `status_aktif` int(1) NOT NULL,
   `level_akses` int(1) NOT NULL,
   `mulai_kerja` date DEFAULT NULL,
-  `akhir_kerja` date DEFAULT NULL,
-  PRIMARY KEY (`id_user`),
-  KEY `jenis_kelamin` (`jenis_kelamin`),
-  KEY `jenis_kelamin_2` (`jenis_kelamin`),
-  KEY `status_aktif` (`status_aktif`),
-  KEY `level_akses` (`level_akses`),
-  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`jenis_kelamin`) REFERENCES `gender` (`id_gender`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `user_ibfk_2` FOREIGN KEY (`status_aktif`) REFERENCES `statusaktif` (`id_aktif`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `user_ibfk_3` FOREIGN KEY (`level_akses`) REFERENCES `levelakses` (`id_akses`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `akhir_kerja` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Indexes for dumped tables
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Jo','jojo','Pak Jojo','Jln Kalimantan','089682269773',1,1,1,'2018-07-17','2021-08-27'),(2,'sasaaa','123','Sasa Anwar','Jln Jawa no 187','089765491332',2,1,2,'2020-11-15',NULL),(3,'aldeff','54321','Aldief teha','Jln sumatera 10','089765789332',1,1,2,'2020-11-15',NULL);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+--
+-- Indeks untuk tabel `detail_periksa`
+--
+ALTER TABLE `detail_periksa`
+  ADD PRIMARY KEY (`id_detail_periksa`),
+  ADD UNIQUE KEY `id_periksa` (`id_periksa`,`id_subkriteria`),
+  ADD KEY `id_subkriteria` (`id_subkriteria`);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indeks untuk tabel `gender`
+--
+ALTER TABLE `gender`
+  ADD PRIMARY KEY (`id_gender`);
+
+--
+-- Indeks untuk tabel `jamur`
+--
+ALTER TABLE `jamur`
+  ADD PRIMARY KEY (`id_jamur`),
+  ADD UNIQUE KEY `id_rak` (`id_rak`,`id_petugas`),
+  ADD UNIQUE KEY `status_jamur` (`status_jamur`);
+
+--
+-- Indeks untuk tabel `kriteria`
+--
+ALTER TABLE `kriteria`
+  ADD PRIMARY KEY (`id_kriteria`);
+
+--
+-- Indeks untuk tabel `levelakses`
+--
+ALTER TABLE `levelakses`
+  ADD PRIMARY KEY (`id_akses`);
+
+--
+-- Indeks untuk tabel `periksa`
+--
+ALTER TABLE `periksa`
+  ADD PRIMARY KEY (`id_periksa`),
+  ADD UNIQUE KEY `id_jamur` (`id_jamur`,`id_petugas`);
+
+--
+-- Indeks untuk tabel `promethee`
+--
+ALTER TABLE `promethee`
+  ADD PRIMARY KEY (`id_promethee`),
+  ADD UNIQUE KEY `id_jamur` (`id_jamur`,`petugas`),
+  ADD KEY `petugas` (`petugas`);
+
+--
+-- Indeks untuk tabel `rakjamur`
+--
+ALTER TABLE `rakjamur`
+  ADD PRIMARY KEY (`id_rak`),
+  ADD UNIQUE KEY `jenis_kelamin` (`jenis_kelamin`,`status_aktif`);
+
+--
+-- Indeks untuk tabel `statusaktif`
+--
+ALTER TABLE `statusaktif`
+  ADD PRIMARY KEY (`id_aktif`);
+
+--
+-- Indeks untuk tabel `status_jamurt`
+--
+ALTER TABLE `status_jamurt`
+  ADD PRIMARY KEY (`id_status`);
+
+--
+-- Indeks untuk tabel `sub_kriteria`
+--
+ALTER TABLE `sub_kriteria`
+  ADD PRIMARY KEY (`id_sub_kriteria`),
+  ADD UNIQUE KEY `id_kriteria` (`id_kriteria`);
+
+--
+-- Indeks untuk tabel `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id_user`),
+  ADD UNIQUE KEY `jenis_kelamin` (`jenis_kelamin`),
+  ADD UNIQUE KEY `status_aktif` (`status_aktif`,`level_akses`),
+  ADD KEY `level_akses` (`level_akses`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `detail_periksa`
+--
+ALTER TABLE `detail_periksa`
+  MODIFY `id_detail_periksa` int(5) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `gender`
+--
+ALTER TABLE `gender`
+  MODIFY `id_gender` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `jamur`
+--
+ALTER TABLE `jamur`
+  MODIFY `id_jamur` int(5) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `kriteria`
+--
+ALTER TABLE `kriteria`
+  MODIFY `id_kriteria` int(2) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `levelakses`
+--
+ALTER TABLE `levelakses`
+  MODIFY `id_akses` int(1) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `periksa`
+--
+ALTER TABLE `periksa`
+  MODIFY `id_periksa` int(5) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `promethee`
+--
+ALTER TABLE `promethee`
+  MODIFY `id_promethee` int(7) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `rakjamur`
+--
+ALTER TABLE `rakjamur`
+  MODIFY `id_rak` int(3) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `statusaktif`
+--
+ALTER TABLE `statusaktif`
+  MODIFY `id_aktif` int(1) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `status_jamurt`
+--
+ALTER TABLE `status_jamurt`
+  MODIFY `id_status` int(1) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `sub_kriteria`
+--
+ALTER TABLE `sub_kriteria`
+  MODIFY `id_sub_kriteria` int(2) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `user`
+--
+ALTER TABLE `user`
+  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `detail_periksa`
+--
+ALTER TABLE `detail_periksa`
+  ADD CONSTRAINT `detail_periksa_ibfk_1` FOREIGN KEY (`id_subkriteria`) REFERENCES `sub_kriteria` (`id_sub_kriteria`),
+  ADD CONSTRAINT `detail_periksa_ibfk_2` FOREIGN KEY (`id_periksa`) REFERENCES `periksa` (`id_periksa`);
+
+--
+-- Ketidakleluasaan untuk tabel `periksa`
+--
+ALTER TABLE `periksa`
+  ADD CONSTRAINT `periksa_ibfk_1` FOREIGN KEY (`id_jamur`) REFERENCES `jamur` (`id_jamur`);
+
+--
+-- Ketidakleluasaan untuk tabel `promethee`
+--
+ALTER TABLE `promethee`
+  ADD CONSTRAINT `promethee_ibfk_1` FOREIGN KEY (`id_jamur`) REFERENCES `jamur` (`id_jamur`),
+  ADD CONSTRAINT `promethee_ibfk_2` FOREIGN KEY (`petugas`) REFERENCES `user` (`id_user`);
+
+--
+-- Ketidakleluasaan untuk tabel `rakjamur`
+--
+ALTER TABLE `rakjamur`
+  ADD CONSTRAINT `rakjamur_ibfk_1` FOREIGN KEY (`id_rak`) REFERENCES `jamur` (`id_rak`);
+
+--
+-- Ketidakleluasaan untuk tabel `status_jamurt`
+--
+ALTER TABLE `status_jamurt`
+  ADD CONSTRAINT `status_jamurt_ibfk_1` FOREIGN KEY (`id_status`) REFERENCES `jamur` (`status_jamur`);
+
+--
+-- Ketidakleluasaan untuk tabel `sub_kriteria`
+--
+ALTER TABLE `sub_kriteria`
+  ADD CONSTRAINT `sub_kriteria_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `kriteria` (`id_kriteria`);
+
+--
+-- Ketidakleluasaan untuk tabel `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`level_akses`) REFERENCES `levelakses` (`id_akses`),
+  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`status_aktif`) REFERENCES `statusaktif` (`id_aktif`),
+  ADD CONSTRAINT `user_ibfk_3` FOREIGN KEY (`jenis_kelamin`) REFERENCES `gender` (`id_gender`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2020-11-15 23:25:13
