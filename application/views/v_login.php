@@ -77,9 +77,9 @@
                                 <div class="clearfix"></div>
                                 <div class="separator">
 
-                                    <p style="font-size:14px" class="change_link">Rak Jamur Baru ? 
+                                    <!-- <p style="font-size:14px" class="change_link">Rak Jamur Baru ? 
                                         <a style="font-size:18px; color:white" href="<?php echo base_url(); ?>c_pendaftaran_rak" style="color:white" class="to_register">Daftarkan Rak</a>
-                                    </p>
+                                    </p> -->
                                     <p style="font-size:13px" class="change_link">Kabar Jamur Anda? 
                                         <a style="font-size:16px; color:white" href="<?php echo base_url(); ?>c_lihat_jamur" style="color:white" class="to_register">Lihat Data Jamur</a>
                                     </p>
