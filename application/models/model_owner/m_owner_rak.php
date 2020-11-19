@@ -20,11 +20,16 @@ class m_owner_rak extends CI_Model {
 //     }
 
     function ambilDataRak() {
-        $query = $this->db->query("SELECT r.id_rak, r.nama_rak, r.lokasi, r.tgl_rak, r.status_aktif as aksi,
-            sa.keterangan_aktif as status FROM rakjamur r
-        JOIN gender g on r.jenis_kelamin = g.id_gender
-        JOIN statusaktif sa on r.status_aktif = sa.id_aktif
-        ORDER BY r.nama_rak");
+        $query = $this->db->query("
+            SELECT r.id_rak, r.nama_rak, r.lokasi, r.tgl_rak, r.status_aktif as aksi,
+            sa.keterangan_aktif as status 
+            
+            FROM rakjamur r
+                JOIN statusaktif sa on r.status_aktif = sa.id_aktif
+            
+            ORDER BY r.nama_rak"
+        );
+
         return $query->result_array();
     }
 

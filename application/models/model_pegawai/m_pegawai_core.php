@@ -155,35 +155,25 @@ class m_pegawai_core extends CI_Model {
 
     // fungsi ini digunakan untuk mengambil data promethee yang tersimpan dalam database
     function ambil_data_promethee() {
-<<<<<<< Updated upstream
-        $query = 
-            "SELECT
-                    r.nama_rak as rak,
-                    r.tgl_rak,
-                    ps.tanggal as tanggal_penilaian,
-                    p.tanggal_perhitungan as tanggal_promethee,
-                    p.leaving_flow,
-                    p.entering_flow,
-                    p.id_promethee,
-                    p.net_flow as nilai_promethee,
-                    u.nama as petugas
-                    
-            FROM promethee p
-                        JOIN jamur j ON (p.id_jamur = j.id_jamur)
-                        JOIN rakjamur r ON (r.id_rak = j.id_rak)
-                        JOIN periksa ps ON (j.id_jamur = ps.id_jamur)
-                        JOIN user u ON (p.petugas = u.id_user)
-                    
-            ORDER BY p.tanggal_perhitungan, p.net_flow DESC";
+        $query = "
+            SELECT 
+                r.nama_rak as rak , 
+                r.tgl_rak, 
+                ps.tanggal as tanggal_penilaian, 
+                p.tanggal_perhitungan as tanggal_promethee, 
+                p.leaving_flow, 
+                p.entering_flow, 
+                p.id_promethee, 
+                p.net_flow as nilai_promethee, 
+                u.nama as petugas 
             
-=======
-        $query = "SELECT r.nama_rak as rak , r.tgl_rak, ps.tanggal as tanggal_penilaian, p.tanggal_perhitungan as tanggal_promethee, p.leaving_flow, p.entering_flow, p.id_promethee, p.net_flow as nilai_promethee, u.nama as petugas 
-        FROM promethee p JOIN jamur j ON (p.id_jamur = j.id_jamur)
-        JOIN rakjamur r ON (r.id_rak = j.id_rak) 
-        JOIN periksa ps ON (j.id_jamur = ps.id_jamur) 
-        JOIN user u ON (p.petugas = u.id_user) 
-        ORDER BY p.tanggal_perhitungan, p.net_flow DESC";
->>>>>>> Stashed changes
+            FROM promethee p JOIN jamur j ON (p.id_jamur = j.id_jamur)
+                JOIN rakjamur r ON (r.id_rak = j.id_rak) 
+                JOIN periksa ps ON (j.id_jamur = ps.id_jamur) 
+                JOIN user u ON (p.petugas = u.id_user) 
+        
+            ORDER BY p.tanggal_perhitungan, p.net_flow DESC";
+
         return $this->db->query($query);
     }
 
