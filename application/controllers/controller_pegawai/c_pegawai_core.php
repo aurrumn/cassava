@@ -35,8 +35,7 @@ class c_pegawai_core extends CI_Controller {
     function core() {
         $id_loged_user = $this->session->userdata('id_user');
         $data['promethee'] = $this->m_pegawai_core->ambil_data_promethee();
-        // if ($this->m_pegawai_core->system_core($id_loged_user) == TRUE) {
-            if (true) {
+        if ($this->m_pegawai_core->system_core($id_loged_user) == TRUE) {
             $this->session->set_flashdata('message', 'PENGHITUNGAN PROMETHEE BERHASIL');
             $data['promethee'] = $this->m_pegawai_core->ambil_data_promethee();
             $this->template->pegawaiview('pegawai/pegawai_jamur_core', $data);
